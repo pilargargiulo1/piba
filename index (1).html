@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luminaria | Lámparas artesanales</title>
+  <meta name="description" content="Lámparas de diseño y artesanales para darle calidez a tu hogar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf6ee;
+      --ink: #2b2118;
+      --muted: #7a6a5a;
+      --accent: #e8a33d;
+      --accent-dark: #c27f1c;
+      --card: #ffffff;
+      --night: #1f1710;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(251,246,238,.92); backdrop-filter: blur(8px); border-bottom: 1px solid #eadfce; }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; }
+    .logo span { color: var(--accent-dark); }
+    nav ul { display: flex; gap: 24px; list-style: none; font-size: .95rem; }
+    nav ul a:hover { color: var(--accent-dark); }
+
+    /* Hero */
+    .hero { background: var(--night); color: #fff; overflow: hidden; position: relative; }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; min-height: 520px; padding-top: 60px; padding-bottom: 60px; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 18px; }
+    .hero p { color: #d9cbb8; max-width: 460px; margin-bottom: 28px; }
+    .btn { display: inline-block; background: var(--accent); color: #2b2118; padding: 13px 26px; border-radius: 999px; font-weight: 500; transition: background .2s, transform .2s; }
+    .btn:hover { background: #f1b44f; transform: translateY(-2px); }
+    .btn.ghost { background: transparent; border: 1px solid #6b5a46; color: #fff; margin-left: 10px; }
+    .btn.ghost:hover { background: #33271c; }
+
+    /* Lámpara dibujada en CSS */
+    .lamp { position: relative; height: 380px; display: flex; justify-content: center; }
+    .glow { position: absolute; top: 40px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(232,163,61,.55), rgba(232,163,61,0) 70%); animation: pulse 4s ease-in-out infinite; }
+    .shade { position: absolute; top: 70px; width: 170px; height: 120px; background: linear-gradient(180deg, #f6d28a, #e8a33d); clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%); }
+    .stem { position: absolute; top: 190px; width: 10px; height: 140px; background: #5a4631; border-radius: 5px; }
+    .base { position: absolute; top: 325px; width: 120px; height: 18px; background: #5a4631; border-radius: 50%; }
+    @keyframes pulse { 0%,100% { opacity: .75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+
+    /* Secciones */
+    section { padding: 80px 0; }
+    .section-title { text-align: center; margin-bottom: 14px; font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .section-sub { text-align: center; color: var(--muted); margin-bottom: 44px; }
+
+    /* Productos */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 18px rgba(80,55,20,.08); transition: transform .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(80,55,20,.16); }
+    .thumb { height: 190px; display: grid; place-items: center; font-size: 4rem; }
+    .t1 { background: linear-gradient(135deg, #fde7bd, #f3c46d); }
+    .t2 { background: linear-gradient(135deg, #e6d5c1, #bfa07c); }
+    .t3 { background: linear-gradient(135deg, #ffe9d2, #f0a77a); }
+    .t4 { background: linear-gradient(135deg, #e8e2d6, #c9bfa9); }
+    .card-body { padding: 20px; }
+    .card-body h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .card-body p { color: var(--muted); font-size: .92rem; margin-bottom: 14px; }
+    .price-row { display: flex; align-items: center; justify-content: space-between; }
+    .price { font-weight: 500; color: var(--accent-dark); font-size: 1.1rem; }
+    .card a.mini { font-size: .88rem; border: 1px solid var(--accent); padding: 6px 14px; border-radius: 999px; }
+    .card a.mini:hover { background: var(--accent); }
+
+    /* Nosotros */
+    .about { background: #f3e9d9; }
+    .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 16px; }
+    .about p { color: #5d4d3c; margin-bottom: 14px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: center; }
+    .stat { background: #fff; border-radius: 16px; padding: 22px 10px; }
+    .stat strong { display: block; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--accent-dark); }
+    .stat span { font-size: .85rem; color: var(--muted); }
+
+    /* Contacto */
+    .contact { text-align: center; }
+    .contact .btn { margin: 6px; }
+    .contact p { color: var(--muted); }
+
+    footer { background: var(--night); color: #b9a994; text-align: center; padding: 28px 20px; font-size: .88rem; }
+
+    @media (max-width: 780px) {
+      .hero .wrap, .about .wrap { grid-template-columns: 1fr; }
+      .hero .wrap { text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .lamp { height: 300px; transform: scale(.8); }
+      nav ul { gap: 14px; font-size: .85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <a href="#inicio" class="logo">Lumi<span>naria</span></a>
+        <ul>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div>
+          <h1>La luz justa para cada rincón de tu casa</h1>
+          <p>Lámparas de diseño y hechas a mano. Calidez, estilo y luz que transforma los ambientes.</p>
+          <a href="#productos" class="btn">Ver lámparas</a>
+          <a href="#contacto" class="btn ghost">Consultar</a>
+        </div>
+        <div class="lamp" aria-hidden="true">
+          <div class="glow"></div>
+          <div class="shade"></div>
+          <div class="stem"></div>
+          <div class="base"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="productos">
+      <div class="wrap">
+        <h2 class="section-title">Nuestras lámparas</h2>
+        <p class="section-sub">Algunos de nuestros modelos más elegidos</p>
+        <div class="grid">
+          <article class="card">
+            <div class="thumb t1">💡</div>
+            <div class="card-body">
+              <h3>Lámpara de mesa</h3>
+              <p>Pantalla de tela y base de madera. Ideal para la mesa de luz.</p>
+              <div class="price-row"><span class="price">$25.000</span><a class="mini" href="#contacto">Pedir</a></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb t2">🪔</div>
+            <div class="card-body">
+              <h3>Lámpara colgante</h3>
+              <p>Estilo moderno para living, comedor o cocina.</p>
+              <div class="price-row"><span class="price">$38.000</span><a class="mini" href="#contacto">Pedir</a></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb t3">🏮</div>
+            <div class="card-body">
+              <h3>Velador artesanal</h3>
+              <p>Hecho a mano, luz cálida y suave para dormitorios.</p>
+              <div class="price-row"><span class="price">$18.000</span><a class="mini" href="#contacto">Pedir</a></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb t4">🔦</div>
+            <div class="card-body">
+              <h3>Lámpara de pie</h3>
+              <p>Líneas simples y metal negro. Para leer cómodo.</p>
+              <div class="price-row"><span class="price">$45.000</span><a class="mini" href="#contacto">Pedir</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="nosotros">
+      <div class="wrap">
+        <div>
+          <h2>Iluminamos tu hogar con cariño</h2>
+          <p>Somos un emprendimiento dedicado a crear y vender lámparas que combinan diseño, calidad y buen precio. Cada pieza se piensa para que tu espacio se sienta único.</p>
+          <p>Hacemos trabajos a pedido: elegí el modelo, el color y el tamaño.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>+500</strong><span>clientes felices</span></div>
+          <div class="stat"><strong>100%</strong><span>hecho a mano</span></div>
+          <div class="stat"><strong>24 h</strong><span>respuesta</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="wrap">
+        <h2 class="section-title">Hablemos</h2>
+        <p class="section-sub">Escribinos y te asesoramos para elegir tu lámpara ideal</p>
+        <!-- Cambiá el número (con código de país, sin + ni espacios) -->
+        <a class="btn" href="https://wa.me/5491100000000?text=Hola!%20Quiero%20consultar%20por%20una%20lámpara" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn ghost" style="color:#2b2118;border-color:#c9b79e" href="https://instagram.com/tuusuario" target="_blank" rel="noopener">Instagram</a>
+        <p style="margin-top:22px">📍 Buenos Aires, Argentina · Envíos a todo el país</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Luminaria · Todos los derechos reservados</footer>
+
+</body>
+</html>
